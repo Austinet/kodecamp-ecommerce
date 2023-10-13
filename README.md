@@ -42,24 +42,24 @@ https://fakeapi.platzi.com/en/rest/products
 
 
 ### Screenshot
-- Desktop Screen
- ![Desktop Screen](/screenshots/desktop-screen.PNG)
-- Medium Screen
-![Medium Screen](/screenshots/medium-screen.PNG)
-- Mobile Screen
-![Mobile Screen](/screenshots/small-screen.PNG)
-- Desktop Screen With Cart
-![Desktop Screen](/screenshots/desktop-cart.PNG)
-- Mobile Screen With Cart
-![Mobile Screen With Cart](/screenshots/small-screen-cart.PNG)
-- Single Product Desktop
-![Single Product Desktop](/screenshots/single-product-desktop.png)
-- Single Product Mobile
-![Single Product Mobile](/screenshots/single-product-mobile.png)
+Desktop Screen
+- ![Desktop Screen](/screenshots/desktop-screen.PNG)
+ Medium Screen
+- ![Medium Screen](/screenshots/medium-screen.PNG)
+ Mobile Screen
+- ![Mobile Screen](/screenshots/small-screen.PNG)
+ Desktop Screen With Cart
+- ![Desktop Screen](/screenshots/desktop-cart.PNG)
+ Mobile Screen With Cart
+- ![Mobile Screen With Cart](/screenshots/small-screen-cart.PNG)
+ Single Product Desktop
+- ![Single Product Desktop](/screenshots/single-product-desktop.png)
+Single Product Mobile
+- ![Single Product Mobile](/screenshots/single-product-mobile.png)
 
 ### Links
 - [Solution URL](https://github.com/Austinet/kodecamp-ecommerce)
-- [Live site URL]()
+- [Live site URL](https://kodecamp-ecommerce-austinet.netlify.app)
 
 ## My process
 

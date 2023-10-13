@@ -10,7 +10,6 @@ export const reducer = (state, action) => {
       ...state,
       cart: state.cart.map((item) => {
         if (item.id === payload.id) {
-          state.cartTotal += item.price * payload.quantity;
           return {
             ...item,
             quantity: item.quantity + payload.quantity,
@@ -19,6 +18,8 @@ export const reducer = (state, action) => {
           return item;
         }
       }),
+      cartTotal: state.cartTotal + payload.price * payload.quantity
+
     };
   };
 
