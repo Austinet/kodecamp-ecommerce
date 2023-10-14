@@ -35,7 +35,7 @@ const Product = () => {
       <Header />
       <main>
         <section className="bg-gray-100">
-          <div className="w-11/12 lg:w-10/12 mx-auto pb-[2rem] pt-[6.5rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem] lg:min-h-[70vh] min-h-[73vh]">
+          <div className="w-11/12 lg:w-10/12 mx-auto pb-[2rem] pt-[6.5rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem] lg:min-h-[72vh] min-h-[77vh]">
             {isLoading ? (
               <div
                 role="status"
