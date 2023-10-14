@@ -8,7 +8,7 @@ const Header = () => {
   const { dispatch, isCartOpen, cart } = useContext(MainContext);
 
   return (
-    <header className="lg:static fixed w-full top-0 z-10 bg-white shadow-md">
+    <header className="fixed w-full top-0 z-10 bg-white shadow-md">
       <div>
         <nav className="w-11/12 lg:w-10/12 mx-auto py-5 lg:py-7 flex justify-between items-center">
           <Link to="/">

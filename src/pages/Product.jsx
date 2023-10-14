@@ -16,10 +16,34 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
-      const response = await axios.get(`/products/${item.id}`);
+      // const response = await axios.get(`/products/${item.id}`);
+      const response ={status: 100}
       if (response.status === 200) {
         setProduct(response.data);
         setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        setProduct( {
+          id: 94,
+          title: "Rustic Plastic Chair",
+          price: 135,
+          description:
+            "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+          images: [
+            "https://i.imgur.com/fpT4052.jpeg",
+            "https://i.imgur.com/5iNAL9T.jpeg",
+            "https://i.imgur.com/kTPCFG2.jpeg",
+          ],
+          creationAt: "2023-10-11T03:24:10.000Z",
+          updatedAt: "2023-10-11T03:24:10.000Z",
+          category: {
+            id: 4,
+            name: "Shoes",
+            image: "https://i.imgur.com/x0K3SKA.jpeg",
+            creationAt: "2023-10-11T03:24:10.000Z",
+            updatedAt: "2023-10-11T03:24:10.000Z",
+          },
+        })
       }
     } catch (error) {
       console.log(error);
@@ -34,8 +58,8 @@ const Product = () => {
     <>
       <Header />
       <main>
-        <section className="bg-gray-100">
-          <div className="w-11/12 lg:w-10/12 mx-auto pb-[5rem] pt-[9rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem]">
+        <section className="bg-gray-100  pb-[4rem] pt-[9rem] xl:pb-[2.5rem] xl:pt-[8rem]">
+          <div className="w-11/12 lg:w-10/12 mx-auto">
             {isLoading ? (
               <div
                 role="status"
@@ -60,12 +84,12 @@ const Product = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              <div className="rounded-[0.5rem] bg-white shadow-md flex flex-col sm:flex-row  sm:h-[70vh] sm:gap-3 lg:gap-12">
+              <div className="rounded-[0.5rem] bg-white shadow-md flex flex-col sm:flex-row sm:gap-3 lg:gap-12 xs:h-[70vh] sm:h-[77vh]">
                 <div className="sm:w-1/2">
                   <img
                     src={product.images[0]}
                     alt={product.description}
-                    className="w-full h-[250px] sm:h-full sm:rounded-l-[0.5rem] rounded-t-[0.5rem] sm:rounded-t-none"
+                    className="w-full h-[260px] sm:h-full sm:rounded-l-[0.5rem] rounded-t-[0.5rem] sm:rounded-t-none"
                   />
                 </div>
                 <div className="p-5 py-8 lg:p-10 flex flex-col justify-center gap-2 sm:w-1/2">
