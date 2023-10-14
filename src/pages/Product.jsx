@@ -23,7 +23,6 @@ const Product = () => {
       }
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
   };
 
@@ -38,7 +37,9 @@ const Product = () => {
         <section className="bg-gray-200">
           <div className="w-11/12 lg:w-10/12 mx-auto pb-[1.8rem] pt-[6rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem]">
             {isLoading ? (
-              <p className="text-center text-lg h-[62.7vh]">Loading</p>
+              <div className="grid place-items-center lg:min-h-[69vh] min-h-[72.5vh]">
+                <p className="text-lg">Loading...</p>
+              </div>
             ) : (
               <div className="rounded-[0.5rem] bg-white shadow-md flex flex-col sm:flex-row sm:h-[70vh] sm:gap-3 lg:gap-12">
                 <div className="sm:w-1/2">

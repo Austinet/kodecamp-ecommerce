@@ -50,7 +50,7 @@ export const reducer = (state, action) => {
     case "DECREASE_ITEM": {
       let newCart = state.cart.map((item) => {
         if (item.id === action.payload.id) {
-          if (item.quantity === 0) {
+          if (item.quantity <= 1) {
             return item;
           } else {
             return {
