@@ -16,34 +16,10 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
-      // const response = await axios.get(`/products/${item.id}`);
-      const response ={status: 100}
+      const response = await axios.get(`/products/${item.id}`);
       if (response.status === 200) {
         setProduct(response.data);
         setIsLoading(false);
-      } else {
-        setIsLoading(false);
-        setProduct( {
-          id: 94,
-          title: "Rustic Plastic Chair",
-          price: 135,
-          description:
-            "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-          images: [
-            "https://i.imgur.com/fpT4052.jpeg",
-            "https://i.imgur.com/5iNAL9T.jpeg",
-            "https://i.imgur.com/kTPCFG2.jpeg",
-          ],
-          creationAt: "2023-10-11T03:24:10.000Z",
-          updatedAt: "2023-10-11T03:24:10.000Z",
-          category: {
-            id: 4,
-            name: "Shoes",
-            image: "https://i.imgur.com/x0K3SKA.jpeg",
-            creationAt: "2023-10-11T03:24:10.000Z",
-            updatedAt: "2023-10-11T03:24:10.000Z",
-          },
-        })
       }
     } catch (error) {
       console.log(error);

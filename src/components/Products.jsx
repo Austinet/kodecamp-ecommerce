@@ -28,12 +28,12 @@ const Products = () => {
 
   return (
     <section className="bg-gray-100">
-      <div className="w-11/12 lg:w-10/12 mx-auto pb-[2.5rem] pt-[6.5rem] lg:pt-[4rem] lg:pb-[4rem]">
+      <div className="w-11/12 lg:w-10/12 mx-auto lg:pt-[4rem] lg:pb-[4rem]">
         <div>
           {isLoading ? (
             <div
               role="status"
-              className="grid place-items-center lg:min-h-[62.7vh] min-h-[72.5vh]"
+              className="grid place-items-center lg:min-h-[78vh] min-h-[72.5vh]"
             >
               <svg
                 aria-hidden="true"
