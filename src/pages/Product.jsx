@@ -35,7 +35,7 @@ const Product = () => {
       <Header />
       <main>
         <section className="bg-gray-100">
-          <div className="w-11/12 lg:w-10/12 mx-auto pb-[2rem] pt-[6.5rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem] lg:min-h-[72vh] min-h-[77vh]">
+          <div className="w-11/12 lg:w-10/12 mx-auto pb-[5rem] pt-[9rem] sm:pb-[3.3rem] lg:pt-[2.5rem] lg:pb-[2.5rem]">
             {isLoading ? (
               <div
                 role="status"
@@ -60,7 +60,7 @@ const Product = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              <div className="rounded-[0.5rem] bg-white shadow-md flex flex-col sm:flex-row sm:h-[70vh] sm:gap-3 lg:gap-12">
+              <div className="rounded-[0.5rem] bg-white shadow-md flex flex-col sm:flex-row  sm:h-[70vh] sm:gap-3 lg:gap-12">
                 <div className="sm:w-1/2">
                   <img
                     src={product.images[0]}
@@ -68,7 +68,7 @@ const Product = () => {
                     className="w-full h-[250px] sm:h-full sm:rounded-l-[0.5rem] rounded-t-[0.5rem] sm:rounded-t-none"
                   />
                 </div>
-                <div className="p-4 lg:p-10 flex flex-col justify-center gap-2 sm:w-1/2">
+                <div className="p-5 py-8 lg:p-10 flex flex-col justify-center gap-2 sm:w-1/2">
                   <h2 className="text-blue-600 text-xl font-semibold">
                     Kodecamp Ecommerce
                   </h2>
