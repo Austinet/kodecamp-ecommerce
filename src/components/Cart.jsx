@@ -4,8 +4,16 @@ import { CgClose } from "react-icons/cg";
 import { BsTrashFill } from "react-icons/bs";
 import { MainContext } from "../App";
 
+
 const Cart = () => {
   const { dispatch, cart, cartTotal } = useContext(MainContext);
+
+  
+const removeProduct = (product) => {
+  if (confirm(`Remove ${product.title} from Cart?`)) {
+    dispatch({ type: "REMOVE_ITEM", payload: product })
+  }
+}
 
   return (
     <section className="w-[95%] sm:w-[500px] p-5 fixed right-0 top-0 bg-white z-10 shadow-md max-h-screen overflow-y-scroll">
@@ -64,12 +72,19 @@ const Cart = () => {
                       <BiPlus className="text-blue-600 font-semibold text-[1.3rem] hover:text-blue-400" />
                     </button>
                   </div>
-                  <button
+                  {/* <button
                     className="md:w-[200px] w-full flex justify-center gap-2 items-center py-2 bg-red-600 hover:bg-red-400 outline-none text-white text-md font-semibold rounded-md"
                     onClick={() =>
                       dispatch({ type: "REMOVE_ITEM", payload: product })
                     }
                   >
+                    <BsTrashFill />
+                    <span>Remove</span>
+                  </button> */}
+                  <button
+                    className="md:w-[200px] w-full flex justify-center gap-2 items-center py-2 bg-red-600 hover:bg-red-400 outline-none text-white text-md font-semibold rounded-md"
+                    onClick={() => removeProduct(product)}
+                    >
                     <BsTrashFill />
                     <span>Remove</span>
                   </button>
