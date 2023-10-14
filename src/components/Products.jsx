@@ -28,7 +28,7 @@ const Products = () => {
 
   return (
     <section className="bg-gray-100">
-      <div className="w-11/12 lg:w-10/12 mx-auto lg:pt-[4rem] lg:pb-[4rem]">
+      <div className="w-11/12 lg:w-10/12 mx-auto pt-[9rem] pb-[4rem]">
         <div>
           {isLoading ? (
             <div
