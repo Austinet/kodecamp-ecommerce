@@ -28,7 +28,7 @@ const Products = () => {
 
   return (
     <section className="bg-gray-100">
-      <div className="w-11/12 lg:w-10/12 mx-auto pb-[2.5rem] pt-[6rem] lg:pt-[4rem] lg:pb-[4rem]">
+      <div className="w-11/12 lg:w-10/12 mx-auto pb-[2.5rem] pt-[6.5rem] lg:pt-[4rem] lg:pb-[4rem]">
         <div>
           {isLoading ? (
             <div
@@ -37,7 +37,7 @@ const Products = () => {
             >
               <svg
                 aria-hidden="true"
-                className="w-[5rem] h-[5rem] mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className="w-[5rem] h-[5rem] mr-2 text-gray-200 animate-spin dark:text-gray-400 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
