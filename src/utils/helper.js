@@ -2,6 +2,8 @@ export const defaultState = {
   cart: [],
   cartTotal: 0,
   isCartOpen: false,
+  isModalOpen: false,
+  modalMessage: "",
 };
 
 export const reducer = (state, action) => {
@@ -18,8 +20,9 @@ export const reducer = (state, action) => {
           return item;
         }
       }),
-      cartTotal: state.cartTotal + payload.price * payload.quantity
-
+      cartTotal: state.cartTotal + payload.price * payload.quantity,
+      isModalOpen: true,
+      modalMessage: `Added to cart successfully`,
     };
   };
 
@@ -40,6 +43,8 @@ export const reducer = (state, action) => {
           cart: [...state.cart, { ...action.payload }],
           cartTotal:
             state.cartTotal + action.payload.price * action.payload.quantity,
+          isModalOpen: true,
+          modalMessage: `Added to cart successfully`,
         };
       }
     }
@@ -48,9 +53,11 @@ export const reducer = (state, action) => {
       return incrementItem(action.payload);
 
     case "DECREASE_ITEM": {
+      let openModal = true;
       let newCart = state.cart.map((item) => {
         if (item.id === action.payload.id) {
           if (item.quantity <= 1) {
+            openModal = false;
             return item;
           } else {
             return {
@@ -66,6 +73,8 @@ export const reducer = (state, action) => {
         ...state,
         cart: newCart,
         cartTotal: calcTotal(newCart),
+        modalMessage: `Removed from cart successfully`,
+        isModalOpen: openModal,
       };
     }
 
@@ -75,6 +84,8 @@ export const reducer = (state, action) => {
         ...state,
         cart: newCart,
         cartTotal: calcTotal(newCart),
+        modalMessage: `Removed from cart successfully`,
+        isModalOpen: true,
       };
     }
 
@@ -82,6 +93,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isCartOpen: !state.isCartOpen,
+      };
+    case "TOGGLE_MODAL":
+      return {
+        ...state,
+        isModalOpen: false,
       };
 
     default:

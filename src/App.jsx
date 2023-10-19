@@ -17,6 +17,8 @@ const App = () => {
           cart: state.cart,
           isCartOpen: state.isCartOpen,
           cartTotal: state.cartTotal,
+          isModalOpen: state.isModalOpen,
+          modalMessage: state.modalMessage
         }}
       >
         <Routes>

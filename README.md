@@ -1,4 +1,4 @@
-# KodeCamp - Task Manager App
+# KodeCamp - kodecamp-ecommerce
 
 ## Table of contents
 
@@ -32,7 +32,10 @@
 
 - Come up with a design for the single page
 
-N/b: Use this endpoint https://fakeapi.platzi.com/en/rest/products
+N/b: Use this endpoint
+version 1: https://fakeapi.platzi.com/en/rest/products
+
+version 2: https://fakestoreapi.com/products
 
 You can take a cue from this https://shoppie-psi.vercel.app/ 
 
@@ -56,6 +59,10 @@ Desktop Screen
 - ![Single Product Desktop](/screenshots/single-product-desktop.png)
 Single Product Mobile
 - ![Single Product Mobile](/screenshots/single-product-mobile.png)
+ Search Products
+- ![Search Products](/screenshots/search.png)
+ Filter Products
+- ![Filter Products](/screenshots/filter.png)
 
 ### Links
 - [Solution URL](https://github.com/Austinet/kodecamp-ecommerce)
@@ -75,7 +82,7 @@ Single Product Mobile
 
 ### What I learned
 
-I was able to practice working with ReactJs and Tailwind CSS
+I was able to practice working with ReactJs, Tailwind CSS and Axios.
 
 ### Continued development
 

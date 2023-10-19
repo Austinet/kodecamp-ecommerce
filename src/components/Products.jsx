@@ -1,12 +1,43 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "../api/axios";
 import { FaCartPlus } from "react-icons/fa";
+import { BiSolidChevronRight } from "react-icons/bi";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import axios from "../api/axios";
 import { MainContext } from "../App";
-import { BiSolidChevronsRight } from "react-icons/bi";
+import Loading from "./Loading";
+
+let categories = [
+  {
+    id: 1,
+    name: "All",
+    active: true,
+  },
+  {
+    id: 2,
+    name: "Men's clothing",
+    active: false,
+  },
+  {
+    id: 3,
+    name: "Women's clothing",
+    active: false,
+  },
+  {
+    id: 4,
+    name: "Electronics",
+    active: false,
+  },
+  {
+    id: 5,
+    name: "Jewelery",
+    active: false,
+  },
+];
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { dispatch } = useContext(MainContext);
 
@@ -15,10 +46,42 @@ const Products = () => {
       const response = await axios.get("/products");
       if (response.status === 200) {
         setProducts(response.data);
+        setDisplayProducts(response.data);
         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // Filter by categories
+  const filterCategory = (category) => {
+    if (category === "All") {
+      setDisplayProducts(products);
+    } else {
+      let filter = products.filter(
+        (product) => product.category.toUpperCase() === category.toUpperCase()
+      );
+      setDisplayProducts(filter);
+    }
+
+    categories = categories.map((categoryItem) => {
+      if (categoryItem.name.toUpperCase() === category.toUpperCase()) {
+        return { ...categoryItem, active: true };
+      } else {
+        return { ...categoryItem, active: false };
+      }
+    });
+  };
+
+  // Search feature
+  const searchProducts = (e) => {
+    let filter = products.filter((products) =>
+      products.title.toUpperCase().includes(e.target.value.toUpperCase())
+    );
+
+    if (filter.length > 0) {
+      setDisplayProducts(filter);
     }
   };
 
@@ -28,80 +91,117 @@ const Products = () => {
 
   return (
     <section className="bg-gray-100">
-      <div className="w-11/12 lg:w-10/12 mx-auto sm:pt-[9rem] pt-[7rem] pb-[4rem]">
+      <div className="w-11/12 xl:w-10/12 mx-auto pt-[7rem] pb-[4rem] sm:pt-[9rem]">
         <div>
           {isLoading ? (
-            <div
-              role="status"
-              className="grid place-items-center lg:min-h-[78vh] min-h-[72.5vh]"
-            >
-              <svg
-                aria-hidden="true"
-                className="w-[5rem] h-[5rem] mr-2 text-gray-200 animate-spin dark:text-gray-400 fill-blue-600"
-                viewBox="0 0 100 101"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                  fill="currentFill"
-                />
-              </svg>
-              <span className="sr-only">Loading...</span>
-            </div>
+            <Loading />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 lg:justify-between justify-center gap-[1.25rem] lg:gap-[3rem] md:items-start">
-              {products.map((product) => {
-                return (
-                  <div
-                    className="rounded-[0.5rem] bg-white shadow-md"
-                    key={product.id}
-                  >
-                    <div>
-                      <img
-                        src={product.images[0]}
-                        alt={product.description}
-                        className="w-full h-[200px] md:h-[250px] rounded-t-[0.5rem]"
-                      />
-                    </div>
-                    <div className="p-4 md:p-8 flex flex-col justify-between gap-3">
-                      <h3 className="flex justify-between items-center md:text-[1.4rem] text-[1.25rem] leading-[130%] font-semibold">
-                        <span>{product.title}</span>{" "}
-                        <span>${product.price}</span>
-                      </h3>
-                      <Link to={`/product/${product.id}`}>
-                        <p className="text-base md:text-[1.05rem] mb-2 ">
-                          <span>
-                            {product.description.length > 65
-                              ? `${product.description.slice(0, 65)}...`
-                              : product.description}{" "}
-                          </span>{" "}
-                          <span className="text-blue-600 font-semibold hover:text-blue-400">
-                            see more{" "}
-                            <BiSolidChevronsRight className="inline text-[1.35rem] pb-[0.2rem]" />
-                          </span>{" "}
+            <div>
+              <div className="flex flex-col md:flex-row gap-5 md:justify-between lg:items-center mb-[2rem]">
+                {/* Sort by category */}
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => filterCategory(`${category.name}`)}
+                      className={`md:text-lg font-semibold rounded-md px-2 py-1 md:px-4 md:py-2 hover:bg-blue-600 hover:text-white ${
+                        category.active ? "bg-blue-600 text-white" : "bg-white "
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Search */}
+                <div className="w-full md:w-auto">
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search by title"
+                    onChange={searchProducts}
+                    className="w-full md:w-[300px] h-[45px] md:h-[50px] lg:text-lg text-base font-semibold rounded-md px-3 outline-none border-2 border-blue-400"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 lg:justify-between gap-[1.25rem] lg:gap-[3rem] md:items-start">
+                {displayProducts.map((product) => {
+                  return (
+                    <div
+                      className="rounded-[0.5rem] bg-white shadow-md p-4 md:p-6 flex flex-col gap-4"
+                      key={product.id}
+                    >
+                      <div className="border border-blue-300 p-2">
+                        <img
+                          src={product.image}
+                          alt={product.description}
+                          className="mx-auto h-[200px] object-contain"
+                        />
+                      </div>
+                      <div className="flex flex-col justify-between gap-3">
+                        <h3 className="md:text-[1.25rem] text-[1.1rem] leading-[120%] font-semibold">
+                          {product.title.length > 32
+                            ? `${product.title.slice(0, 32)}...`
+                            : product.title}
+                        </h3>
+                        <Link to={`/product/${product.id}`}>
+                          <p className="text-base">
+                            <span>
+                              {product.description.length > 65
+                                ? `${product.description.slice(0, 62)}...`
+                                : product.description}{" "}
+                            </span>
+                            <span className="text-[1.1rem] text-blue-600 font-semibold hover:text-blue-400">
+                              <span className="">see more</span>
+                              <BiSolidChevronRight className="inline text-[1.1rem] pb-[0.1rem]" />
+                            </span>
+                          </p>
+                        </Link>
+                        <p className="flex my-[0.1rem]">
+                          {[...Array(Math.round(product.rating.rate))].map(
+                            (star, i) => (
+                              <BsStarFill key={i} className="text-yellow-500" />
+                            )
+                          )}
+                          {[...Array(5 - Math.round(product.rating.rate))].map(
+                            (star, i) => (
+                              <BsStar key={i} className="text-yellow-500" />
+                            )
+                          )}
                         </p>
-                      </Link>
-                      <button
-                        className="flex justify-center md:gap-4 gap-3 items-center w-full py-3 bg-blue-600 hover:bg-blue-400 outline-none text-white text-lg font-semibold rounded-md"
-                        onClick={() =>
-                          dispatch({
-                            type: "ADD_ITEM",
-                            payload: { ...product, quantity: 1 },
-                          })
-                        }
-                      >
-                        <FaCartPlus />
-                        <span>Add to cart</span>
-                      </button>
+                        <div className="flex justify-between items-center mb-[0.6rem]">
+                          <p className="flex items-center gap-6">
+                            <span className="md:text-[1.35rem] text-[1.1rem] leading-[120%] font-semibold">
+                              ${product.price}
+                            </span>
+                            <span className="bg-blue-200 md:text-lg text-base px-2 py-1 font-bold rounded-md text-blue-600">
+                              50%
+                            </span>
+                          </p>
+                          <p className="font-semibold text-gray-600 line-through">
+                            ${product.price * 2}.00
+                          </p>
+                        </div>
+
+                        <button
+                          className="flex justify-center md:gap-4 gap-3 items-center w-full py-3 bg-blue-600 hover:bg-blue-400 outline-none text-white md:text-lg font-semibold rounded-md"
+                          onClick={() =>
+                            dispatch({
+                              type: "ADD_ITEM",
+                              payload: { ...product, quantity: 1 },
+                            })
+                          }
+                        >
+                          <FaCartPlus />
+                          <span>Add to cart</span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
