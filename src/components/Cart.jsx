@@ -43,7 +43,7 @@ const Cart = () => {
                   </div>
                   <div className="w-2/3 flex flex-col gap-3">
                     <h3 className="sm:text-[1.05rem] leading-[100%] text-base font-semibold">
-                      {product.title.length > 29
+                      {product?.title.length > 29
                         ? `${product.title.slice(0, 29)}...`
                         : product.title}
                     </h3>

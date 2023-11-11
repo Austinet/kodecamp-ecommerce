@@ -140,9 +140,10 @@ export const reducer = (state, action) => {
       }
     }
     case "LOG_OUT": {
-      storedItems.isUserLoggedIn = false
-      storedItems.userAuthenticated = {}
-      localStorage.setItem("defaultState", JSON.stringify(storedItems));
+      // storedItems.isUserLoggedIn = false
+      // storedItems.userAuthenticated = null
+      console.log("first")
+      localStorage.setItem("defaultValues", JSON.stringify({...storedItems, isUserLoggedIn: false, userAuthenticated: {}}));
 
       return {
         ...state,

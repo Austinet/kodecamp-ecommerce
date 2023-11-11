@@ -254,7 +254,7 @@ const Register = () => {
                         />
                         <div className="absolute right-3 top-[0.62rem]" onClick={togglePasswordView}>
                         {
-                          passwordView.current.type === "password" ? <AiFillEye className="text-3xl" /> :  <AiFillEyeInvisible className="text-3xl" />
+                          passwordType === "password" ? <AiFillEye className="text-3xl" /> :  <AiFillEyeInvisible className="text-3xl" />
                         }  
                         </div>
                       </div>
