@@ -6,8 +6,6 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 import axios from "../api/axios";
 import { MainContext } from "../App";
 import Loading from "./Loading";
-//rem
-// import productsDB from "../utils/data";
 
 let categories = [
   {
@@ -101,8 +99,6 @@ const Products = () => {
 
   useEffect(() => {
     getProducts();
-    //rem
-    // setDisplayProducts(productsDB);
   }, []);
 
   return (

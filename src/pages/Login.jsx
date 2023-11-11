@@ -1,7 +1,8 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MainContext } from "../App";
 import cartImg from "../assets/images/cart.jpg";
 
@@ -18,14 +19,13 @@ const defaultUserErrors = {
 const Login = () => {
   const [userLogin, setUserLogin] = useState(defaultDetails);
   const [userLoginErrors, setUserLoginErrors] = useState(defaultUserErrors);
-
+  const [passwordType, setPasswordType] = useState("password");
+  const passwordView = useRef(null);
   const { dispatch, usersDB } = useContext(MainContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userLogin);
-    console.log(usersDB);
 
     const authenticate = usersDB.filter(
       (users) => users.email === userLogin.email
@@ -36,15 +36,22 @@ const Login = () => {
         dispatch({ type: "USER_LOGGED_IN", payload: userLogin });
         navigate("/");
       } else {
-        console.log("Incorrect password");
-        setUserLoginErrors({...userLoginErrors, password: true})
+        setUserLoginErrors({ ...userLoginErrors, password: true });
       }
     } else {
-      // setSuccess(!success)
-      console.log("Email not found, please sign up");
-      setUserLoginErrors({...userLoginErrors, email: true})
+      setUserLoginErrors({ ...userLoginErrors, email: true });
     }
   };
+
+  const togglePasswordView = () => {
+    console.log(passwordView);
+    if (passwordView.current.type === "password") {
+      setPasswordType("text");
+    } else {
+      setPasswordType("password");
+    }
+  };
+
   return (
     <>
       <Header />
@@ -100,25 +107,31 @@ const Login = () => {
                       >
                         Password:
                       </label>
-                      <input
-                        type="password"
-                        value={userLogin.password}
-                        onChange={(e) =>
-                          setUserLogin({
-                            ...userLogin,
-                            password: e.target.value,
-                          })
-                        }
-                        name="password"
-                        id="password"
-                        className="border border-[#00000093] w-full h-[3.13rem] rounded-lg px-3 outline-none focus:border-2"
-                        required
-                      />
-                      {/* <img
-                        src="assets/icons/eye-icon.svg"
-                        alt="eye icon"
-                        role="button"
-                      /> */}
+                      <div className="relative">
+                        <input
+                          type={passwordType}
+                          value={userLogin.password}
+                          onChange={(e) =>
+                            setUserLogin({
+                              ...userLogin,
+                              password: e.target.value,
+                            })
+                          }
+                          ref={passwordView}
+                          className="border border-[#00000093] w-full h-[3.13rem] rounded-lg px-3 outline-none focus:border-2"
+                          required
+                        />
+                        <div
+                          className="absolute right-3 top-[0.62rem]"
+                          onClick={togglePasswordView}
+                        >
+                          {passwordType === "password" ? (
+                            <AiFillEye className="text-3xl" />
+                          ) : (
+                            <AiFillEyeInvisible className="text-3xl" />
+                          )}
+                        </div>
+                      </div>
                       <span
                         className={`text-red-600 ${
                           userLoginErrors.password ? "block" : "hidden"

@@ -23,13 +23,11 @@ if (defaultValues === null) {
   };
 
   localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
-  let storedItems = JSON.parse(localStorage.getItem("defaultValues"));
-  console.log(storedItems)
 }
 
 export const reducer = (state, action) => {
   let storedItems = JSON.parse(localStorage.getItem("defaultValues"));
-console.log(storedItems)
+
   const incrementItem = (payload) => {
     return {
       ...state,
@@ -149,7 +147,7 @@ console.log(storedItems)
       return {
         ...state,
         isUserLoggedIn: storedItems.isUserLoggedIn,
-        userAuthenticated: {}
+        userAuthenticated: storedItems.userAuthenticated
       }
     }
 
