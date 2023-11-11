@@ -37,6 +37,8 @@ version 1: https://fakeapi.platzi.com/en/rest/products
 
 version 2: https://fakestoreapi.com/products
 
+version 3: Add a sign up and login screen
+
 You can take a cue from this https://shoppie-psi.vercel.app/ 
 
 ## Resources

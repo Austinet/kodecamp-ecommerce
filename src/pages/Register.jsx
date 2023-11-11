@@ -6,6 +6,7 @@ import { MainContext } from "../App";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
+//Default values for user inputs and error checking
 const defaultUser = {
   firstName: "",
   lastName: "",
@@ -38,6 +39,7 @@ const Register = () => {
   const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   const PHONE_REGEX = /^\d{11}$/;
 
+  //Validates user inputs and makes sign up requests
   const handleSubmit = (e) => {
     e.preventDefault();
     let validateForm = {};
@@ -100,6 +102,7 @@ const Register = () => {
     }
   };
 
+  //Toggles the password view from hidden to seen for the user
   const togglePasswordView = () => {
     if (passwordView.current.type === "password") {
       setPasswordType("text")

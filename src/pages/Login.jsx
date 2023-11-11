@@ -6,11 +6,14 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MainContext } from "../App";
 import cartImg from "../assets/images/cart.jpg";
 
+
+//Default values for user inputs and error checking
 const defaultDetails = {
   email: "",
   password: "",
   keepLoggedIn: false,
 };
+
 const defaultUserErrors = {
   email: false,
   password: false,
@@ -24,6 +27,7 @@ const Login = () => {
   const { dispatch, usersDB } = useContext(MainContext);
   const navigate = useNavigate();
 
+  //Validates user and makes login requests
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,6 +47,7 @@ const Login = () => {
     }
   };
 
+  //Toggles the password view from hidden to seen for the user
   const togglePasswordView = () => {
     console.log(passwordView);
     if (passwordView.current.type === "password") {

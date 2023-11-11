@@ -1,3 +1,4 @@
+// Sets the default useReducer default values
 export let defaultValues = {
   cart: [],
   cartTotal: 0,
@@ -25,6 +26,8 @@ if (defaultValues === null) {
   localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
 }
 
+
+//Performs operations based on different actions
 export const reducer = (state, action) => {
   let storedItems = JSON.parse(localStorage.getItem("defaultValues"));
 
@@ -140,9 +143,6 @@ export const reducer = (state, action) => {
       }
     }
     case "LOG_OUT": {
-      // storedItems.isUserLoggedIn = false
-      // storedItems.userAuthenticated = null
-      console.log("first")
       localStorage.setItem("defaultValues", JSON.stringify({...storedItems, isUserLoggedIn: false, userAuthenticated: {}}));
 
       return {

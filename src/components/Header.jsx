@@ -11,6 +11,8 @@ const Header = () => {
   const { dispatch, isCartOpen, isModalOpen, cart, userAuthenticated } =
     useContext(MainContext);
   const [toggleNav, setToggleNav] = useState(false);
+
+  //Logs out the user
   const logout = () => {
     dispatch({ type: "LOG_OUT" });
   };
@@ -26,10 +28,17 @@ const Header = () => {
             </h2>
           </Link>
           <div className="md:flex items-center gap-[2.5rem]">
-            <div className={`absolute w-screen h-screen bg-[#000000a2] md:bg-white md:w-fit md:h-fit z-20 md:z-10 md:static top-[0rem] ${toggleNav ? "left-0" :"-left-[50rem]" }`}>
+            <div
+              className={`absolute w-screen h-screen bg-[#000000a2] md:bg-white md:w-fit md:h-fit z-20 md:z-10 md:static top-[0rem] ${
+                toggleNav ? "left-0" : "-left-[50rem]"
+              }`}
+            >
               {userAuthenticated?.email ? (
                 <div className="flex flex-col md:flex-row md:items-center gap-4 pt-[1.3rem] pb-[1.6rem] px-[1.3rem] md:p-0 w-[300px] md:w-fit bg-white rounded-b-md">
-                  <AiOutlineClose className="text-xl cursor-pointer mb-5 md:hidden" onClick={() => setToggleNav(!toggleNav)} />
+                  <AiOutlineClose
+                    className="text-xl cursor-pointer mb-5 md:hidden"
+                    onClick={() => setToggleNav(!toggleNav)}
+                  />
                   <p className="mr-[1rem] text-lg md:text-xl font-semibold">
                     Happy shopping {userAuthenticated.firstName}!
                   </p>
@@ -42,7 +51,10 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="flex flex-col md:flex-row md:items-center gap-4 pt-[1.3rem] pb-[1.6rem] px-[1.3rem] md:p-0 w-[300px] md:w-fit bg-white rounded-b-md">
-                  <AiOutlineClose className="text-xl cursor-pointer mb-5 md:hidden" onClick={() => setToggleNav(!toggleNav)} /> 
+                  <AiOutlineClose
+                    className="text-xl cursor-pointer mb-5 md:hidden"
+                    onClick={() => setToggleNav(!toggleNav)}
+                  />
                   <Link
                     to={"/login"}
                     className="mr-[1rem] text-lg md:text-xl font-semibold"
@@ -73,10 +85,11 @@ const Header = () => {
                   </p>
                 )}
               </div>
-              
-              <FaBars className="text-xl cursor-pointer md:hidden" onClick={() => setToggleNav(!toggleNav)} /> 
 
-              
+              <FaBars
+                className="text-xl cursor-pointer md:hidden"
+                onClick={() => setToggleNav(!toggleNav)}
+              />
             </div>
           </div>
         </nav>
