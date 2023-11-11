@@ -1,12 +1,35 @@
-export const defaultState = {
+export let defaultValues = {
   cart: [],
   cartTotal: 0,
   isCartOpen: false,
   isModalOpen: false,
   modalMessage: "",
+  usersDB : [],
+  userAuthenticated: {},
+  isUserLoggedIn: false,
 };
 
+ defaultValues = JSON.parse(localStorage.getItem("defaultValues"));
+
+if (defaultValues === null) {
+  defaultValues = {
+    cart: [],
+    cartTotal: 0,
+    isCartOpen: false,
+    isModalOpen: false,
+    modalMessage: "",
+    usersDB: [],
+    isUserLoggedIn: false,
+  };
+
+  localStorage.setItem("defaultValues", JSON.stringify(defaultValues));
+  let storedItems = JSON.parse(localStorage.getItem("defaultValues"));
+  console.log(storedItems)
+}
+
 export const reducer = (state, action) => {
+  let storedItems = JSON.parse(localStorage.getItem("defaultValues"));
+console.log(storedItems)
   const incrementItem = (payload) => {
     return {
       ...state,
@@ -99,6 +122,36 @@ export const reducer = (state, action) => {
         ...state,
         isModalOpen: false,
       };
+    case "ADD_USER": {
+      storedItems.usersDB = [...storedItems.usersDB, action.payload]
+      localStorage.setItem("defaultValues", JSON.stringify(storedItems));
+      return {
+        ...state,
+        usersDB: [...storedItems.usersDB ]
+      }
+    }
+    case "USER_LOGGED_IN": {
+      storedItems.isUserLoggedIn = true
+      storedItems.userAuthenticated = storedItems.usersDB.filter(users => users.email === action.payload.email)[0]
+      localStorage.setItem("defaultValues", JSON.stringify(storedItems));
+
+      return {
+        ...state,
+        isUserLoggedIn: storedItems.isUserLoggedIn,
+        userAuthenticated: storedItems.userAuthenticated
+      }
+    }
+    case "LOG_OUT": {
+      storedItems.isUserLoggedIn = false
+      storedItems.userAuthenticated = {}
+      localStorage.setItem("defaultState", JSON.stringify(storedItems));
+
+      return {
+        ...state,
+        isUserLoggedIn: storedItems.isUserLoggedIn,
+        userAuthenticated: {}
+      }
+    }
 
     default:
       break;

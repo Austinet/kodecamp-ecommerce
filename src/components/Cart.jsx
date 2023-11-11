@@ -25,10 +25,10 @@ const Cart = () => {
           </button>
         </div>
         <div className="flex flex-col md:gap-10 gap-5 justify-center">
-          {cart.length < 1 ? (
+          {cart?.length < 1 ? (
             <p>Your cart is empty, add products!</p>
           ) : (
-            cart.map((product) => {
+            cart?.map((product) => {
               return (
                 <div
                   key={product.id}

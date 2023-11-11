@@ -6,6 +6,8 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 import axios from "../api/axios";
 import { MainContext } from "../App";
 import Loading from "./Loading";
+//rem
+// import productsDB from "../utils/data";
 
 let categories = [
   {
@@ -39,7 +41,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { dispatch } = useContext(MainContext);
+  const { dispatch, isUserLoggedIn } = useContext(MainContext);
 
   const getProducts = async () => {
     try {
@@ -85,8 +87,22 @@ const Products = () => {
     }
   };
 
+  //Authenticate users
+  const authenticateUser = (product) => {
+    if (isUserLoggedIn) {
+      dispatch({
+        type: "ADD_ITEM",
+        payload: { ...product, quantity: 1 },
+      });
+    } else {
+      alert("You must be logged in first, please login")
+    }
+  };
+
   useEffect(() => {
     getProducts();
+    //rem
+    // setDisplayProducts(productsDB);
   }, []);
 
   return (
@@ -187,12 +203,7 @@ const Products = () => {
 
                         <button
                           className="flex justify-center md:gap-4 gap-3 items-center w-full py-3 bg-blue-600 hover:bg-blue-400 outline-none text-white md:text-lg font-semibold rounded-md"
-                          onClick={() =>
-                            dispatch({
-                              type: "ADD_ITEM",
-                              payload: { ...product, quantity: 1 },
-                            })
-                          }
+                          onClick={() => authenticateUser(product)}
                         >
                           <FaCartPlus />
                           <span>Add to cart</span>

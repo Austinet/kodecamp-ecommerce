@@ -14,7 +14,7 @@ const Product = () => {
   const item = useParams();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const { dispatch } = useContext(MainContext);
+  const { dispatch, isUserLoggedIn } = useContext(MainContext);
   const [quantity, setQuantity] = useState(1);
 
   const getProduct = async () => {
@@ -28,6 +28,18 @@ const Product = () => {
       console.log(error);
     }
   };
+
+    //Authenticate users
+    const authenticateUser = (product) => {
+      if (isUserLoggedIn) {
+        dispatch({
+          type: "ADD_ITEM",
+          payload: { ...product, quantity },
+        })
+      } else {
+        alert("You must be logged in first, please login")
+      }
+    };
 
   useEffect(() => {
     getProduct();
@@ -111,12 +123,7 @@ const Product = () => {
                     </div>
                     <button
                       className="flex justify-center gap-4 items-center w-full py-3 bg-blue-600 hover:bg-blue-400 outline-none text-white text-lg font-semibold rounded-md"
-                      onClick={() =>
-                        dispatch({
-                          type: "ADD_ITEM",
-                          payload: { ...product, quantity },
-                        })
-                      }
+                      onClick={authenticateUser}
                     >
                       <FaCartPlus />
                       <span>Add to cart</span>
